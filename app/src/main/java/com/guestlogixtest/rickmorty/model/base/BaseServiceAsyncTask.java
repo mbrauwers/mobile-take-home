@@ -2,6 +2,9 @@ package com.guestlogixtest.rickmorty.model.base;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,26 +15,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /*
- * Interface for async calls callback
- */
-interface BaseServiceListener<T> {
-    void onFinished(T result);
-    void onError();
-}
-
-/*
  * Generic AsyncTask class to perform network calls
  */
 
 public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<Void, Void, T> {
 
-    private final Context mContext;
     private final BaseServiceListener mListener;
     private final String mEndpointURL;
     private final Class<T> mResultClass;
 
-    public BaseServiceAsyncTask(Context context, String endpointURL, BaseServiceListener listener, Class<T> theClass) {
-        mContext = context;
+    public BaseServiceAsyncTask(Class<T> theClass, String endpointURL, BaseServiceListener listener) {
         mListener = listener;
         mEndpointURL = endpointURL;
         mResultClass = theClass;
@@ -75,13 +68,14 @@ public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<
             String response = buffer.toString();
 
             try {
-                //here we use reflaction to instantiate the appropriate entity
+                //here we use reflection to instantiate the appropriate entity
                 T obj = mResultClass.newInstance();
-                obj.fromJSON(response);
+                obj.fromJSON(new JSONObject(response));
                 return obj;
             }
             catch (Exception e) {
                 //exception instatiating or parsing object
+                Log.d("msg", "Error parsing/instantiating json: " + e);
                 return null;
             }
 
@@ -115,55 +109,4 @@ public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<
 
     }
 
-    /*
-    private GiphyServiceResponse deserializeServiceResponse(String response){
-
-        GiphyServiceResponse giphyServiceResponse = null;
-
-        try {
-            JSONObject responseJson = new JSONObject(response);
-            JSONArray dataJson = responseJson.getJSONArray("data");
-
-            ArrayList<Gif> gifs = new ArrayList<Gif>();
-
-            for (int i = 0; i < dataJson.length(); i++) {
-
-                JSONObject gifJson = dataJson.getJSONObject(i);
-                JSONObject imagesJson = gifJson.getJSONObject("images");
-                JSONObject fixedHeightImageJson = imagesJson.getJSONObject("fixed_height");
-                JSONObject fixedWidthImageJson = imagesJson.getJSONObject("fixed_width");
-                JSONObject downsizedImageJson = imagesJson.getJSONObject("downsized");
-
-                Image fixedHeight = new Image(fixedHeightImageJson.getString("url"),
-                        fixedWidthImageJson.getInt("width"),
-                        fixedHeightImageJson.getInt("height"));
-
-                Image fixedWidth = new Image(fixedWidthImageJson.getString("url"),
-                        fixedWidthImageJson.getInt("width"),
-                        fixedHeightImageJson.getInt("height"));
-
-                Image downsized = new Image(downsizedImageJson.getString("url"),
-                        fixedWidthImageJson.getInt("width"),
-                        fixedHeightImageJson.getInt("height"));
-
-                Images images = new Images(fixedHeight, fixedWidth, downsized);
-
-                Gif gif = new Gif(gifJson.getString("id"),
-                        gifJson.getString("slug"),
-                        gifJson.getString("username"),
-                        images);
-
-                gifs.add(gif);
-            }
-
-            giphyServiceResponse = new GiphyServiceResponse(gifs);
-        } catch (JSONException e){
-            e.printStackTrace();
-
-            mListener.onError();
-        }
-
-        return giphyServiceResponse;
-    }
-    */
 }

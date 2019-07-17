@@ -4,10 +4,15 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.guestlogixtest.rickmorty.model.base.BaseServiceListener;
+import com.guestlogixtest.rickmorty.model.entities.Episode;
+import com.guestlogixtest.rickmorty.model.entities.EpisodeListResponse;
+import com.guestlogixtest.rickmorty.model.services.RickMortyAPI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +34,26 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        RickMortyAPI api = new RickMortyAPI();
+        api.getEpisodes(new BaseServiceListener<EpisodeListResponse>() {
+            @Override
+            public void onFinished(EpisodeListResponse result) {
+                Log.d("msg", "Our episodes are");
+
+                for (Episode episode: result.result) {
+                    Log.d("msg", episode.name);
+                }
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+
     }
 
     @Override

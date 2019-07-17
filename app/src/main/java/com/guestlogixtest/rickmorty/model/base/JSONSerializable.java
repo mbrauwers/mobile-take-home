@@ -1,8 +1,11 @@
 package com.guestlogixtest.rickmorty.model.base;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public interface JSONSerializable {
 
-    void fromJSON(String jsonStr);
+    void fromJSON(JSONObject object) throws JSONException;
     String toJSON();
 
 }
