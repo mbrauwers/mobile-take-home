@@ -1,4 +1,4 @@
-package com.guestlogixtest.rickmorty.model.services;
+package com.guestlogixtest.rickmorty.model.base;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -22,16 +23,18 @@ interface BaseServiceListener<T> {
  * Generic AsyncTask class to perform network calls
  */
 
-public class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
+public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<Void, Void, T> {
 
     private final Context mContext;
     private final BaseServiceListener mListener;
     private final String mEndpointURL;
+    private final Class<T> mResultClass;
 
-    public BaseServiceAsyncTask(Context context, String endpointURL, BaseServiceListener listener) {
+    public BaseServiceAsyncTask(Context context, String endpointURL, BaseServiceListener listener, Class<T> theClass) {
         mContext = context;
         mListener = listener;
         mEndpointURL = endpointURL;
+        mResultClass = theClass;
     }
 
     @Override
@@ -71,9 +74,17 @@ public class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
 
             String response = buffer.toString();
 
-            return
+            try {
+                //here we use reflaction to instantiate the appropriate entity
+                T obj = mResultClass.newInstance();
+                obj.fromJSON(response);
+                return obj;
+            }
+            catch (Exception e) {
+                //exception instatiating or parsing object
+                return null;
+            }
 
-            return deserializeServiceResponse(response);
 
         } catch (IOException e) {
 

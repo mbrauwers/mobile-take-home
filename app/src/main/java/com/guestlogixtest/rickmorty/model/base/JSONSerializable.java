@@ -1,6 +1,6 @@
-package com.guestlogixtest.rickmorty.model.entities;
+package com.guestlogixtest.rickmorty.model.base;
 
-interface JSONSerializable {
+public interface JSONSerializable {
 
     void fromJSON(String jsonStr);
     String toJSON();

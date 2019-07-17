@@ -1,12 +1,14 @@
 package com.guestlogixtest.rickmorty.model.entities;
 
+import com.guestlogixtest.rickmorty.model.base.JSONSerializable;
+
 import java.util.Date;
 import java.util.List;
 
 /*
  * Models the RickMorty Episode entity
  */
-public class Episode {
+public class Episode implements JSONSerializable {
 
     public Integer id;
     public String name;
@@ -16,4 +18,13 @@ public class Episode {
     public Date created;
     public List<String> characters;
 
+    @Override
+    public void fromJSON(String jsonStr) {
+
+    }
+
+    @Override
+    public String toJSON() {
+        return null;
+    }
 }
