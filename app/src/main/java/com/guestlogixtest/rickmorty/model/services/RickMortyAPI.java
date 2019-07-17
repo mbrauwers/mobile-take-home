@@ -1,4 +1,4 @@
-package com.guestlogixtest.rickmorty.data;
+package com.guestlogixtest.rickmorty.model.services;
 
 public class RickMortyAPI {
 

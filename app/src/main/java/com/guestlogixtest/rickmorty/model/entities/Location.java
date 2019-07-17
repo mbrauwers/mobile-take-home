@@ -1,4 +1,4 @@
-package com.guestlogixtest.rickmorty.data.model;
+package com.guestlogixtest.rickmorty.model.entities;
 
 public class Location {
     public String name;

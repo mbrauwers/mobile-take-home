@@ -1,4 +1,4 @@
-package com.guestlogixtest.rickmorty.data.model;
+package com.guestlogixtest.rickmorty.model.entities;
 
 import java.util.Date;
 import java.util.List;

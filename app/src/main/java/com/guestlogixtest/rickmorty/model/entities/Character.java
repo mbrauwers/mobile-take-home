@@ -1,4 +1,4 @@
-package com.guestlogixtest.rickmorty.data.model;
+package com.guestlogixtest.rickmorty.model.entities;
 
 /*
  * Models the RickMorty Character Entity
