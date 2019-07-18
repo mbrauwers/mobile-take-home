@@ -1,5 +1,6 @@
 package com.guestlogixtest.rickmorty.episodelist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guestlogixtest.rickmorty.R;
+import com.guestlogixtest.rickmorty.base.Constants;
+import com.guestlogixtest.rickmorty.episodedetail.EpisodeDetailActivity;
 import com.guestlogixtest.rickmorty.model.entities.Episode;
 
 import java.util.List;
@@ -42,7 +45,12 @@ public class EpisodeListActivity extends AppCompatActivity implements EpisodeLis
     //configures adapter with the provided episodes list
     public void onEpisodesLoaded(List<Episode> episodes) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.episodeListRecView);
-        adapter = new EpisodeListAdapter(episodes);
+        adapter = new EpisodeListAdapter(episodes, new OnItemClicked() {
+            @Override
+            public void onItemClicked(Episode episode) {
+                presenter.onEpisodeSelected(episode);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
@@ -50,6 +58,13 @@ public class EpisodeListActivity extends AppCompatActivity implements EpisodeLis
     //we had an error while loading the episodes data
     public void onEpisodesLoadError(String error) {
         showErrorMessage(error);
+    }
+
+    @Override
+    public void goToEpisodeDetail(Episode episode) {
+        Intent intent = new Intent(this, EpisodeDetailActivity.class);
+        intent.putExtra(Constants.INTENT_PARAM_EPISODE_ID, episode.id);
+        startActivity(intent);
     }
 
     void configUI() {

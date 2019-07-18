@@ -39,12 +39,14 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Episode episode = episodes.get(position);
+        final Episode episode = episodes.get(position);
         holder.episodeLbl.setText(String.format("%s - %s", episode.episode, episode.name));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClicked(position);
+                if (listener != null) {
+                    listener.onItemClicked(episode);
+                }
             }
         });
     }
@@ -60,5 +62,5 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
 }
 
 interface OnItemClicked {
-    void onItemClicked(int position);
+    void onItemClicked(Episode episode);
 }

@@ -46,7 +46,7 @@ public class EpisodeDetailActivity extends AppCompatActivity implements EpisodeD
 
     @Override
     public void onCharactersLoaded(List<EpisodeCharacter> characterList) {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.episodeListRecView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.charactersRecView);
         adapter = new EpisodeDetailCharacterAdapter(characterList);
         recyclerView.setAdapter(adapter);
     }

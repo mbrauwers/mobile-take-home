@@ -28,16 +28,21 @@ public class BaseServiceListAsyncTask<T extends JSONSerializable> extends BaseSe
         //lets call our server
         String response = callServer();
 
+        Log.d("msg", "list characters response is " + response);
+
         try {
             //here we use reflection to instantiate the generic class
             //and call the fromJSON method from the JSONSerializable interface
             JSONArray jsonArray = new JSONArray(response);
+
+            Log.d("msg", "json array is " + jsonArray);
+
             if (jsonArray != null) {
                 List<T> list = new ArrayList<T>();
                 for (int i = 0; i < jsonArray.length(); ++i) {
 
                     T obj = singleObjectClass.newInstance();
-                    obj.fromJSON(new JSONObject(response));
+                    obj.fromJSON(jsonArray.getJSONObject(i));
                     list.add(obj);
 
                 }

@@ -52,10 +52,12 @@ public class RickMortyAPI {
 
         Log.d("msg", "All character ids are "+ characterIds);
 
+        Log.d("msg", "url is " + BASE_URL + "/character/" + characterIds);
+
         BaseServiceListAsyncTask<EpisodeCharacter> asyncTask = new BaseServiceListAsyncTask<>(
                 null,
                 EpisodeCharacter.class,
-                BASE_URL + "/characters/" + characterIds,
+                BASE_URL + "/character/" + characterIds,
                 listener
         );
 
