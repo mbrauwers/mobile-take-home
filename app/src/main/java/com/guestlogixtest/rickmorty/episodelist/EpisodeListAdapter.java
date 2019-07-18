@@ -19,9 +19,11 @@ import java.util.List;
 public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.ViewHolder> {
 
     private List<Episode> episodes;
+    private OnItemClicked listener;
 
-    public EpisodeListAdapter(List<Episode> episodes) {
+    public EpisodeListAdapter(List<Episode> episodes, OnItemClicked listener) {
         this.episodes = episodes;
+        this.listener = listener;
     }
 
     @Override
@@ -36,9 +38,15 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         Episode episode = episodes.get(position);
         holder.episodeLbl.setText(String.format("%s - %s", episode.episode, episode.name));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClicked(position);
+            }
+        });
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,4 +57,8 @@ public class EpisodeListAdapter extends RecyclerView.Adapter<EpisodeListAdapter.
             episodeLbl = itemView.findViewById(R.id.episodeLbl);
         }
     }
+}
+
+interface OnItemClicked {
+    void onItemClicked(int position);
 }

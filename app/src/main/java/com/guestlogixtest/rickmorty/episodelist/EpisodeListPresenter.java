@@ -2,6 +2,7 @@ package com.guestlogixtest.rickmorty.episodelist;
 
 import com.guestlogixtest.rickmorty.model.base.BaseServiceListener;
 import com.guestlogixtest.rickmorty.model.entities.EpisodeListResponse;
+import com.guestlogixtest.rickmorty.model.repository.RickMortyRepository;
 import com.guestlogixtest.rickmorty.model.services.RickMortyAPI;
 
 public class EpisodeListPresenter implements EpisodeListContract.Presenter {
@@ -26,12 +27,19 @@ public class EpisodeListPresenter implements EpisodeListContract.Presenter {
         RickMortyAPI.getSingleton().getEpisodes(new BaseServiceListener<EpisodeListResponse>() {
             @Override
             public void onFinished(EpisodeListResponse result) {
-                view.onEpisodesLoaded(result.episodes);
+
+                RickMortyRepository.getSingleton().setEpisodes(result.episodes);
+
+                if (view != null) {
+                    view.onEpisodesLoaded(result.episodes);
+                }
             }
 
             @Override
             public void onError() {
-                view.onEpisodesLoadError("Error loading episodes");
+                if (view != null) {
+                    view.onEpisodesLoadError("Error loading episodes");
+                }
             }
         });
     }

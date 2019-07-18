@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Constructor;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -18,11 +17,11 @@ import java.net.URL;
  * Generic AsyncTask class to perform network calls and parse the result on something that implements JSONSerializable
  */
 
-public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<Void, Void, T> {
+public abstract class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
 
     private final BaseServiceListener mListener;
     private final String mEndpointURL;
-    private final Class<T> mResultClass;
+    protected final Class<T> mResultClass;
 
     public BaseServiceAsyncTask(Class<T> theClass, String endpointURL, BaseServiceListener listener) {
         mListener = listener;
@@ -30,8 +29,8 @@ public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<
         mResultClass = theClass;
     }
 
-    @Override
-    protected T doInBackground(Void... params) {
+    protected String callServer() {
+
         BufferedReader reader = null;
 
         try {
@@ -66,19 +65,7 @@ public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<
             }
 
             String response = buffer.toString();
-
-            try {
-                //here we use reflection to instantiate the appropriate entity
-                T obj = mResultClass.newInstance();
-                obj.fromJSON(new JSONObject(response));
-                return obj;
-            }
-            catch (Exception e) {
-                //exception instatiating or parsing object
-                Log.d("msg", "Error parsing/instantiating json: " + e);
-                return null;
-            }
-
+            return response;
 
         } catch (IOException e) {
 
@@ -86,6 +73,9 @@ public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<
             return null;
 
         } finally {
+
+            Log.d("msg", "the finally is being executed");
+
             if (reader != null) {
                 try {
                     reader.close();
@@ -94,6 +84,7 @@ public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<
                 }
             }
         }
+
     }
 
     @Override

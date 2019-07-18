@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Character implements JSONSerializable {
+public class EpisodeCharacter implements JSONSerializable {
 
     public Integer id;
     public String name;
