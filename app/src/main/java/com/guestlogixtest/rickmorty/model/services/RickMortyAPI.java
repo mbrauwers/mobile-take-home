@@ -11,8 +11,13 @@ import java.util.ArrayList;
 
 public class RickMortyAPI {
 
+    //base API URL
     private static final String BASE_URL = "https://rickandmortyapi.com/api";
 
+    //our singleton data holder
+    private static RickMortyAPI mSingleton = null;
+
+    //API call to get the episodes
     public void getEpisodes(BaseServiceListener<EpisodeListResponse> listener) {
 
         BaseServiceAsyncTask<EpisodeListResponse> asyncTask = new BaseServiceAsyncTask<>(
@@ -22,7 +27,15 @@ public class RickMortyAPI {
         );
 
         asyncTask.execute();
+    }
 
+    //returns our singleton
+    public static RickMortyAPI getSingleton() {
+        if (mSingleton == null) {
+            mSingleton = new RickMortyAPI();
+        }
+
+        return mSingleton;
     }
 
 }

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        RickMortyAPI api = new RickMortyAPI();
+        RickMortyAPI api = RickMortyAPI.getSingleton();
         api.getEpisodes(new BaseServiceListener<EpisodeListResponse>() {
             @Override
             public void onFinished(EpisodeListResponse result) {

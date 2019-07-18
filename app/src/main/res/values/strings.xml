@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RickMorty</string>
     <string name="action_settings">Settings</string>
+    <string name="episode_list_title"><![CDATA[Rick&Morty Episodes]]></string>
+    <string name="episode">Episode</string>
+    <string name="characters">Characters</string>
 </resources>

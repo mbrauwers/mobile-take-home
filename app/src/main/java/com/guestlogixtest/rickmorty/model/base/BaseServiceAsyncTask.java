@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /*
- * Generic AsyncTask class to perform network calls
+ * Generic AsyncTask class to perform network calls and parse the result on something that implements JSONSerializable
  */
 
 public class BaseServiceAsyncTask<T extends JSONSerializable> extends AsyncTask<Void, Void, T> {
