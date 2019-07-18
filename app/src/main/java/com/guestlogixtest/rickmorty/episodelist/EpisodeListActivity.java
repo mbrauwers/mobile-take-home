@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,9 +60,9 @@ public class EpisodeListActivity extends AppCompatActivity implements EpisodeLis
     }
 
     @Override
-    public void goToEpisodeDetail(Episode episode) {
+    public void goToEpisodeDetail(Integer episodeId) {
         Intent intent = new Intent(this, EpisodeDetailActivity.class);
-        intent.putExtra(Constants.INTENT_PARAM_EPISODE_ID, episode.id);
+        intent.putExtra(Constants.INTENT_PARAM_EPISODE_ID, episodeId);
         startActivity(intent);
     }
 

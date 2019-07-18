@@ -50,4 +50,12 @@ public class EpisodeDetailPresenter implements EpisodeDetailContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void characterSelected(EpisodeCharacter character) {
+        if (view != null) {
+            RickMortyRepository.getSingleton().setCurrentCharacter(character);
+            view.goToCharacterDetail();
+        }
+    }
 }

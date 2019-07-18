@@ -10,10 +10,12 @@ public interface EpisodeDetailContract {
     interface View {
         void onCharactersLoaded(List<EpisodeCharacter> characterList);
         void onCharactersLoadError(String errorMessage);
+        void goToCharacterDetail();
     }
 
     interface Presenter extends BasePresenter {
         void loadCharacters(Integer episodeId);
+        void characterSelected(EpisodeCharacter character);
     }
 
 }

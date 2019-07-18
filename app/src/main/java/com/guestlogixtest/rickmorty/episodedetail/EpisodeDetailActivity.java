@@ -1,5 +1,6 @@
 package com.guestlogixtest.rickmorty.episodedetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.guestlogixtest.rickmorty.R;
 import com.guestlogixtest.rickmorty.base.Constants;
+import com.guestlogixtest.rickmorty.characterdetail.CharacterDetailActivity;
 import com.guestlogixtest.rickmorty.model.entities.Episode;
 import com.guestlogixtest.rickmorty.model.entities.EpisodeCharacter;
 
@@ -47,13 +49,24 @@ public class EpisodeDetailActivity extends AppCompatActivity implements EpisodeD
     @Override
     public void onCharactersLoaded(List<EpisodeCharacter> characterList) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.charactersRecView);
-        adapter = new EpisodeDetailCharacterAdapter(characterList);
+        adapter = new EpisodeDetailCharacterAdapter(characterList, new OnItemClicked() {
+            @Override
+            public void onItemClicked(EpisodeCharacter character) {
+                presenter.characterSelected(character);
+            }
+        });
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onCharactersLoadError(String errorMessage) {
         showErrorMessage(errorMessage);
+    }
+
+    @Override
+    public void goToCharacterDetail() {
+        Intent intent = new Intent(this, CharacterDetailActivity.class);
+        startActivity(intent);
     }
 
     void configUI() {

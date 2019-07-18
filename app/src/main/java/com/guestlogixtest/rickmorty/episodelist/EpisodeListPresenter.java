@@ -57,7 +57,7 @@ public class EpisodeListPresenter implements EpisodeListContract.Presenter {
     @Override
     public void onEpisodeSelected(Episode episode) {
         if (view != null) {
-            view.goToEpisodeDetail(episode);
+            view.goToEpisodeDetail(episode.id);
         }
     }
 

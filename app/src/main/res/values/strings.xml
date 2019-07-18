@@ -4,4 +4,7 @@
     <string name="episode_list_title"><![CDATA[Rick&Morty Episodes]]></string>
     <string name="episode">Episode</string>
     <string name="characters">Characters</string>
+    <string name="dead">DEAD</string>
+    <string name="alive">ALIVE</string>
+    <string name="character_detail">Character Detail</string>
 </resources>

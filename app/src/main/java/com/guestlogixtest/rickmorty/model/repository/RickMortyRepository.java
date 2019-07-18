@@ -14,6 +14,7 @@ public class RickMortyRepository {
     private static RickMortyRepository singleton;
     private List<Episode> episodes;
     private List<EpisodeCharacter> currentEpisodeCharacters;
+    private EpisodeCharacter currentCharacter;
 
     public static RickMortyRepository getSingleton() {
         if (singleton == null) {
@@ -48,5 +49,13 @@ public class RickMortyRepository {
 
     public void setCurrentEpisodeCharacters(List<EpisodeCharacter> currentEpisodeCharacters) {
         this.currentEpisodeCharacters = currentEpisodeCharacters;
+    }
+
+    public EpisodeCharacter getCurrentCharacter() {
+        return currentCharacter;
+    }
+
+    public void setCurrentCharacter(EpisodeCharacter currentCharacter) {
+        this.currentCharacter = currentCharacter;
     }
 }
