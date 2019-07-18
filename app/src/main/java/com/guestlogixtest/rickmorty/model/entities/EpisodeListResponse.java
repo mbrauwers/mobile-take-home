@@ -18,7 +18,7 @@ import java.util.List;
 public class EpisodeListResponse implements JSONSerializable {
 
     public EpisodeListInfo info;
-    public List<Episode> result;
+    public List<Episode> episodes;
 
     @Override
     public void fromJSON(JSONObject responseJSON) throws JSONException {
@@ -38,11 +38,11 @@ public class EpisodeListResponse implements JSONSerializable {
         Log.d("msg", "resultArray is " + resultArray);
 
         if (resultArray != null) {
-            result = new ArrayList<>(resultArray.length());
+            episodes = new ArrayList<>(resultArray.length());
             for (int i = 0; i < resultArray.length(); ++i) {
                 Episode episode = new Episode();
                 episode.fromJSON(resultArray.getJSONObject(i));
-                result.add(episode);
+                episodes.add(episode);
             }
         }
 

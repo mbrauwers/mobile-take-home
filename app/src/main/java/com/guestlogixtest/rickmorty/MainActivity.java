@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinished(EpisodeListResponse result) {
                 Log.d("msg", "Our episodes are");
 
-                for (Episode episode: result.result) {
+                for (Episode episode: result.episodes) {
                     Log.d("msg", episode.name);
                 }
 

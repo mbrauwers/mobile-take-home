@@ -1,15 +1,11 @@
 package com.guestlogixtest.rickmorty.model.entities;
 
-import android.util.Log;
-
 import com.guestlogixtest.rickmorty.model.base.JSONSerializable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /*
@@ -27,7 +23,6 @@ public class Episode implements JSONSerializable {
 
     @Override
     public void fromJSON(JSONObject responseJSON) throws JSONException {
-        Log.d("msg", "Episode::fromJSON " + responseJSON);
 
         id = responseJSON.getInt("id");
         name = responseJSON.getString("name");
