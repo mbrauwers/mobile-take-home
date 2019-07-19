@@ -4,7 +4,6 @@ package com.guestlogixtest.rickmorty.episodedetail;
  * The adapter for the episode list recycler view
  */
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guestlogixtest.rickmorty.R;
-import com.guestlogixtest.rickmorty.model.entities.Episode;
 import com.guestlogixtest.rickmorty.model.entities.EpisodeCharacter;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

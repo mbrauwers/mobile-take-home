@@ -1,7 +1,5 @@
 package com.guestlogixtest.rickmorty.model.entities;
 
-import android.util.Log;
-
 import com.guestlogixtest.rickmorty.model.base.JSONSerializable;
 
 import org.json.JSONArray;

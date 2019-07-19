@@ -8,6 +8,8 @@ import com.guestlogixtest.rickmorty.model.entities.EpisodeListResponse;
 import com.guestlogixtest.rickmorty.model.repository.RickMortyRepository;
 import com.guestlogixtest.rickmorty.model.services.RickMortyAPI;
 
+import java.util.List;
+
 public class EpisodeListPresenter implements EpisodeListContract.Presenter {
 
     private EpisodeListContract.View view;
@@ -29,16 +31,16 @@ public class EpisodeListPresenter implements EpisodeListContract.Presenter {
     public void loadEpisodes() {
         Log.d("msg", "EpisodeListPresenter::loadEpisodes");
 
-        RickMortyAPI.getSingleton().getEpisodes(new BaseServiceListener<EpisodeListResponse>() {
+        RickMortyAPI.getSingleton().getEpisodes(new BaseServiceListener<List<Episode>>() {
             @Override
-            public void onFinished(EpisodeListResponse result) {
+            public void onFinished(List<Episode> episodes) {
 
-                Log.d("msg", "got episodes: " + result.episodes.size());
+                Log.d("msg", "got episodes: " + episodes.size());
 
-                RickMortyRepository.getSingleton().setEpisodes(result.episodes);
+                RickMortyRepository.getSingleton().setEpisodes(episodes);
 
                 if (view != null) {
-                    view.onEpisodesLoaded(result.episodes);
+                    view.onEpisodesLoaded(episodes);
                 }
             }
 

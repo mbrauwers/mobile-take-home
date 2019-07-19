@@ -3,11 +3,9 @@ package com.guestlogixtest.rickmorty.characterdetail;
 import android.widget.ImageView;
 
 import com.guestlogixtest.rickmorty.model.base.ImageDownloadAsyncTask;
-import com.guestlogixtest.rickmorty.model.entities.Episode;
 import com.guestlogixtest.rickmorty.model.entities.EpisodeCharacter;
 import com.guestlogixtest.rickmorty.model.repository.RickMortyRepository;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

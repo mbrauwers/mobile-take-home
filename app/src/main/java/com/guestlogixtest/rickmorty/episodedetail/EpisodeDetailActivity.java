@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.guestlogixtest.rickmorty.R;
 import com.guestlogixtest.rickmorty.base.Constants;
 import com.guestlogixtest.rickmorty.characterdetail.CharacterDetailActivity;
-import com.guestlogixtest.rickmorty.model.entities.Episode;
 import com.guestlogixtest.rickmorty.model.entities.EpisodeCharacter;
 
 import java.util.List;
