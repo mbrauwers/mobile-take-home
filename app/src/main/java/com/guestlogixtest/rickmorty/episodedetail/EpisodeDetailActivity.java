@@ -3,6 +3,7 @@ package com.guestlogixtest.rickmorty.episodedetail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,8 +29,10 @@ public class EpisodeDetailActivity extends AppCompatActivity implements EpisodeD
         setContentView(R.layout.activity_episode_detail);
         presenter = new EpisodeDetailPresenter(this);
 
+        Integer episodeId = getIntent().getIntExtra(Constants.INTENT_PARAM_EPISODE_ID, -1);
         if (getIntent().getIntExtra(Constants.INTENT_PARAM_EPISODE_ID, -1) >= 0) {
-            presenter.loadCharacters(getIntent().getIntExtra(Constants.INTENT_PARAM_EPISODE_ID, -1));
+            presenter.loadCharacters(episodeId);
+            presenter.getEpisodeName(episodeId);
         }
 
         configUI();
@@ -78,6 +81,11 @@ public class EpisodeDetailActivity extends AppCompatActivity implements EpisodeD
         }
     }
 
+    @Override
+    public void gotEpisodeName(String episodeName) {
+        TextView lbl = findViewById(R.id.episodeDetailTitle);
+        lbl.setText("Episode " + episodeName);
+    }
 
     void configUI() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.charactersRecView);

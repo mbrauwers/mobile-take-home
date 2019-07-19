@@ -65,9 +65,11 @@ public class CharacterDetailActivity extends AppCompatActivity implements Charac
 
         if (isAlive) {
             findViewById(R.id.kill_button).setVisibility(View.VISIBLE);
+            findViewById(R.id.killed_lbl).setVisibility(View.GONE);
         }
         else {
-            findViewById(R.id.kill_button).setVisibility(View.GONE);
+            findViewById(R.id.kill_button).setVisibility(View.INVISIBLE);
+            findViewById(R.id.killed_lbl).setVisibility(View.VISIBLE);
         }
     }
 

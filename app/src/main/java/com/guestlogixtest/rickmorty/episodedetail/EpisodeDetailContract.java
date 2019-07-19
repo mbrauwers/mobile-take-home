@@ -12,12 +12,13 @@ public interface EpisodeDetailContract {
         void onCharactersLoadError(String errorMessage);
         void goToCharacterDetail();
         void reloadCharacterList();
-
+        void gotEpisodeName(String episodeName);
     }
 
     interface Presenter extends BasePresenter {
         void loadCharacters(Integer episodeId);
         void characterSelected(EpisodeCharacter character);
+        void getEpisodeName(Integer episodeId);
     }
 
 }

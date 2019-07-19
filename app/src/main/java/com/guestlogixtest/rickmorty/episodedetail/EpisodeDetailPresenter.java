@@ -60,4 +60,12 @@ public class EpisodeDetailPresenter implements EpisodeDetailContract.Presenter {
             view.goToCharacterDetail();
         }
     }
+
+    @Override
+    public void getEpisodeName(Integer episodeId) {
+        Episode episode = RickMortyRepository.getSingleton().getEpisodeById(episodeId);
+        if (view != null && episode != null) {
+
+        }
+    }
 }
