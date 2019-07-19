@@ -12,9 +12,6 @@ public class BaseServiceListAsyncTask<T extends JSONSerializable> extends BaseSe
 
     private Class<T> singleObjectClass;
 
-    public BaseServiceListAsyncTask(Class<List<T>> theClass, String endpointURL, BaseServiceListener listener) {
-        super(theClass, endpointURL, listener);
-    }
 
     public BaseServiceListAsyncTask(Class<List<T>> theClass, Class<T> singleObjectClass, String endpointURL, BaseServiceListener listener) {
         super(theClass, endpointURL, listener);
@@ -28,30 +25,21 @@ public class BaseServiceListAsyncTask<T extends JSONSerializable> extends BaseSe
         //lets call our server
         String response = callServer();
 
-        Log.d("msg", "list characters response is " + response);
-
         try {
             //here we use reflection to instantiate the generic class
             //and call the fromJSON method from the JSONSerializable interface
             JSONArray jsonArray = new JSONArray(response);
 
-            Log.d("msg", "json array is " + jsonArray);
+            List<T> list = new ArrayList<T>();
+            for (int i = 0; i < jsonArray.length(); ++i) {
 
-            if (jsonArray != null) {
-                List<T> list = new ArrayList<T>();
-                for (int i = 0; i < jsonArray.length(); ++i) {
+                T obj = singleObjectClass.newInstance();
+                obj.fromJSON(jsonArray.getJSONObject(i));
+                list.add(obj);
 
-                    T obj = singleObjectClass.newInstance();
-                    obj.fromJSON(jsonArray.getJSONObject(i));
-                    list.add(obj);
-
-                }
-
-                return list;
             }
-            else {
-                return null;
-            }
+
+            return list;
 
         }
         catch (Exception e) {

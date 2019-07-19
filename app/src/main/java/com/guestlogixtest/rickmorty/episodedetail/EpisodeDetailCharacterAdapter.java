@@ -50,7 +50,6 @@ public class EpisodeDetailCharacterAdapter extends RecyclerView.Adapter<EpisodeD
         final EpisodeCharacter character = characters.get(position);
         holder.characterNameLbl.setText(character.name);
 
-        Log.d("msg", "status: " + character.status);
         holder.aliveLbl.setVisibility(View.INVISIBLE);
         holder.deadLbl.setVisibility(View.INVISIBLE);
 

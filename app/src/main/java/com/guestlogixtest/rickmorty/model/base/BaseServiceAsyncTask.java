@@ -1,10 +1,7 @@
 package com.guestlogixtest.rickmorty.model.base;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,14 +16,14 @@ import java.net.URL;
 
 public abstract class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
 
-    private final BaseServiceListener mListener;
-    private final String mEndpointURL;
-    protected final Class<T> mResultClass;
+    private final BaseServiceListener listener;
+    private final String endpointURL;
+    protected final Class<T> resultClass;
 
     public BaseServiceAsyncTask(Class<T> theClass, String endpointURL, BaseServiceListener listener) {
-        mListener = listener;
-        mEndpointURL = endpointURL;
-        mResultClass = theClass;
+        this.listener = listener;
+        this.endpointURL = endpointURL;
+        resultClass = theClass;
     }
 
     protected String callServer() {
@@ -35,7 +32,7 @@ public abstract class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
 
         try {
 
-            URL url = new URL(mEndpointURL);
+            URL url = new URL(endpointURL);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -64,8 +61,7 @@ public abstract class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
                 return null;
             }
 
-            String response = buffer.toString();
-            return response;
+            return buffer.toString();
 
         } catch (IOException e) {
 
@@ -92,10 +88,10 @@ public abstract class BaseServiceAsyncTask<T> extends AsyncTask<Void, Void, T> {
         super.onPostExecute(response);
 
         if (response != null) {
-            mListener.onFinished(response);
+            listener.onFinished(response);
         }
         else {
-            mListener.onError();
+            listener.onError();
         }
 
     }

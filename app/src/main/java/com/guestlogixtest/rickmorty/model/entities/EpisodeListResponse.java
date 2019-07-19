@@ -22,20 +22,14 @@ public class EpisodeListResponse implements JSONSerializable {
 
     @Override
     public void fromJSON(JSONObject responseJSON) throws JSONException {
-        Log.d("msg", "EpisodListResponse " + responseJSON);
 
         JSONObject infoObj = responseJSON.getJSONObject("info");
-        Log.d("msg", "infoObj is " + infoObj);
         if (infoObj != null) {
             info = new EpisodeListInfo();
             info.fromJSON(infoObj);
         }
 
-        Log.d("msg", "After parsing info subobject");
-
         JSONArray resultArray = responseJSON.getJSONArray("results");
-
-        Log.d("msg", "resultArray is " + resultArray);
 
         if (resultArray != null) {
             episodes = new ArrayList<>(resultArray.length());

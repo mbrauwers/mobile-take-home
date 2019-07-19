@@ -19,7 +19,7 @@ public class BaseServiceObjectAsyncTask<T extends JSONSerializable> extends Base
         try {
             //here we use reflection to instantiate the generic class
             //and call the fromJSON method from the JSONSerializable interface
-            T obj = mResultClass.newInstance();
+            T obj = resultClass.newInstance();
             obj.fromJSON(new JSONObject(response));
             return obj;
         }
