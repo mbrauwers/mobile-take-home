@@ -7,4 +7,5 @@
     <string name="dead">DEAD</string>
     <string name="alive">ALIVE</string>
     <string name="character_detail">Character Detail</string>
+    <string name="kill">KILL</string>
 </resources>

@@ -19,7 +19,9 @@ public class EpisodeDetailPresenter implements EpisodeDetailContract.Presenter {
 
     @Override
     public void onResume() {
-
+        if (view != null) {
+            view.reloadCharacterList();
+        }
     }
 
     @Override

@@ -1,5 +1,8 @@
 package com.guestlogixtest.rickmorty.characterdetail;
 
+import android.widget.ImageView;
+
+import com.guestlogixtest.rickmorty.model.base.ImageDownloadAsyncTask;
 import com.guestlogixtest.rickmorty.model.entities.Episode;
 import com.guestlogixtest.rickmorty.model.entities.EpisodeCharacter;
 import com.guestlogixtest.rickmorty.model.repository.RickMortyRepository;
@@ -38,7 +41,28 @@ public class CharacterDetailPresenter implements CharacterDetailContract.Present
             values.put("Status", character.status);
             values.put("Origin", character.origin.name);
             values.put("Current Location", character.location.name);
-            view.onCharacterLoaded(values);
+            view.onCharacterLoaded(values, character.status.equals("Alive"));
         }
     }
+
+    //loads character image
+    @Override
+    public void loadCharacterImage(ImageView imageView) {
+        EpisodeCharacter character = RickMortyRepository.getSingleton().getCurrentCharacter();
+        ImageDownloadAsyncTask asyncTask = new ImageDownloadAsyncTask(character.image);
+        asyncTask.execute(imageView);
+    }
+
+    @Override
+    //kills the character
+    public void killCharacter() {
+        EpisodeCharacter character = RickMortyRepository.getSingleton().getCurrentCharacter();
+        if (character != null) {
+            character.status = "Dead";
+        }
+
+        //just to update the UI
+        loadCharacter();
+    }
+
 }

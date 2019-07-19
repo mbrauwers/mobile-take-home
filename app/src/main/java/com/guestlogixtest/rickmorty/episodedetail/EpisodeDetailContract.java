@@ -11,6 +11,8 @@ public interface EpisodeDetailContract {
         void onCharactersLoaded(List<EpisodeCharacter> characterList);
         void onCharactersLoadError(String errorMessage);
         void goToCharacterDetail();
+        void reloadCharacterList();
+
     }
 
     interface Presenter extends BasePresenter {

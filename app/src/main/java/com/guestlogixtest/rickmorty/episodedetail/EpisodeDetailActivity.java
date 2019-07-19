@@ -2,6 +2,7 @@ package com.guestlogixtest.rickmorty.episodedetail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +69,15 @@ public class EpisodeDetailActivity extends AppCompatActivity implements EpisodeD
         Intent intent = new Intent(this, CharacterDetailActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void reloadCharacterList() {
+        if (adapter != null) {
+            Log.d("msg", "Will call notifyDataSetChanged");
+            adapter.notifyDataSetChanged();
+        }
+    }
+
 
     void configUI() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.charactersRecView);
