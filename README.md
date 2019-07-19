@@ -1,5 +1,22 @@
 ### Guestlogix Take Home Test - Mobile
 
+
+### Maicon Brauwers - ###
+
+You can see that a Model View Presenter architecture was utilized.
+See in package .../episodelist the feature around the first screen, listing episodes
+See in package .../episodedetail the feature around the second screen, listing characters
+See in package .../characterdetail the feature around the third screen, charcter detail
+In package .../model/entities, the model entities
+In package .../model/services, the RickMortyAPI class for actually firing the API calls
+In package .../model/repository, the RickMortyRepository class that holds de queried data in memory
+
+A singleton pattern was utilized for RickMortyRepository and RickMortyAPI
+
+Use the device back button to navigate back.
+
+#######
+
 At Guestlogix we feel that putting developers on the spot with advanced algorithmic puzzles doesn’t exactly highlight one’s true skillset. The intention of this assessment is to see how you approach and tackle a problem in the real world, not quivering in front of a whiteboard.
 
 ### What is the test?
