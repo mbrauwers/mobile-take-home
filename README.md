@@ -9,7 +9,7 @@
 * See in package .../characterdetail the feature around the third screen, charcter detail
 * In package .../model/entities, the model entities
 * In package .../model/services, the RickMortyAPI class for actually firing the API calls
-* In package .../model/repository, the RickMortyRepository class that holds de queried data in memory
+* In package .../model/repository, the RickMortyRepository class that holds the queried data in memory
 * A singleton pattern was utilized for RickMortyRepository and RickMortyAPI
 * Use the device back button to navigate back.
 
